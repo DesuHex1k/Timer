@@ -1,0 +1,42 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Timer from '../../components/Timer.jsx';
+import { timers } from '../../data/timers.js';
+
+export async function getStaticPaths() {
+    return timers.map((timer) => ({
+        params: { slug: timer.slug },
+        props: { timer },
+    }));
+}
+
+const { slug } = Astro.params;
+const timer = timers.find((t) => t.slug === slug);
+
+if (!timer) {
+    throw new Error(`Timer with slug "${slug}" not found`);
+}
+
+const seconds = timer.seconds;
+const minutes = Math.floor(seconds / 60);
+const hours = Math.floor(seconds / 3600);
+
+let title = '';
+if (hours >= 1) {
+    title = `${hours} Hour${hours > 1 ? 's' : ''} Timer`;
+} else {
+    title = `${minutes} Minute${minutes > 1 ? 's' : ''} Timer`;
+}
+
+const description = `Free online ${title.toLowerCase()} countdown timer. Set precise countdowns for meetings, breaks, cooking, or any time-sensitive activity.`;
+---
+
+<Layout title={title} description={description}>
+    <main class="max-w-xl mx-auto p-6 flex flex-col items-center">
+        <h1 class="text-4xl font-extrabold text-center text-white fade-in">{title}</h1>
+        <p class="mt-4 text-center text-gray-300 text-lg max-w-md fade-in">
+            {description}
+        </p>
+        <Timer initialSeconds={timer.seconds} client:load />
+    </main>
+</Layout>
