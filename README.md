@@ -1,5 +1,11 @@
 # Astro Starter Kit: Basics
 
+## 📸 Screenshots
+
+![Screenshot 1](./screenshots/img.png)  
+![Screenshot 2](./screenshots/img_1.png)  
+![Screenshot 3](./screenshots/img_2.png)
+
 ```sh
 npm create astro@latest -- --template basics
 ```
