@@ -1,6 +1,7 @@
 ---
 import TimerNav from '../components/TimerNav.jsx';
 import { timers } from '../data/timers.js';
+import '../styles/tailwind.css';
 const { title, description } = Astro.props;
 ---
 
@@ -11,7 +12,6 @@ const { title, description } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="stylesheet" href="/src/styles/tailwind.css" />
 </head>
 <body class="bg-gray-800 min-h-screen flex flex-col">
 <header class="text-white p-8 flex flex-col gap-4 text-center">
